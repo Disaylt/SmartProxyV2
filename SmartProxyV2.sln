@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartProxyV2", "SmartProxyV2\SmartProxyV2.csproj", "{F24713F0-5E17-44F5-AAE7-58096E001CA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {725E4F00-BFD3-4C34-814C-A05FABF2D98C}
+	EndGlobalSection
+EndGlobal
