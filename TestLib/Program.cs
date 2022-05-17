@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartProxyV2.Models;
 
 namespace TestLib
 {
@@ -10,7 +11,7 @@ namespace TestLib
     {
         static void Main(string[] args)
         {
-
+            Console.ReadLine();
         }
     }
 }
