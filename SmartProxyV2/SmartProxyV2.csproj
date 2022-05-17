@@ -126,6 +126,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMongoCollectionData.cs" />
     <Compile Include="Models\ProxyDataModel.cs" />
     <Compile Include="MongoConnector.cs" />
     <Compile Include="MongoModels\ProxyStoreMongoModel.cs" />

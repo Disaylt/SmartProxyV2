@@ -30,8 +30,8 @@ namespace SmartProxyV2
         public async static Task AddProxyData(string proxyName, ProxyDataModel proxyData)
         {
             var filter = Builders<ProxyStoreMongoModel>.Filter.Eq("ProxyName", proxyName);
-            var proxyNameExist = _collection.Find(filter).ToList().Any(x=> x.ProxyName == proxyName);
-            if(!proxyNameExist)
+            var proxyNameExist = _collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);
+            if (!proxyNameExist)
             {
                 ProxyStoreMongoModel proxyStoreMongoModel = new ProxyStoreMongoModel(proxyData) { ProxyName = proxyName };
                 await _collection.InsertOneAsync(proxyStoreMongoModel);

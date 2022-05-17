@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartProxyV2\SmartProxyV2.csproj">
+      <Project>{f24713f0-5e17-44f5-aae7-58096e001ca6}</Project>
+      <Name>SmartProxyV2</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
