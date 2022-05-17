@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartProxyV2
+namespace SmartProxyV2.Models
 {
-    public class ProxyData
+    public class ProxyDataModel
     {
         public string User { get; set; }
         public string Password { get; set; }

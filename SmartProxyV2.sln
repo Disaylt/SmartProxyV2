@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartProxyV2", "SmartProxyV2\SmartProxyV2.csproj", "{F24713F0-5E17-44F5-AAE7-58096E001CA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLib", "TestLib\TestLib.csproj", "{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F24713F0-5E17-44F5-AAE7-58096E001CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

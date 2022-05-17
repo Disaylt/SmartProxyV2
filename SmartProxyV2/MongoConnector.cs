@@ -21,9 +21,9 @@ namespace SmartProxyV2
             _database = _client.GetDatabase(_databaseName);
         }
 
-        internal static IMongoCollection<BsonDocument> GetCollection(string collectionName)
+        internal static IMongoCollection<T> GetCollection<T>(string collectionName)
         {
-            IMongoCollection<BsonDocument> collection = _database.GetCollection<BsonDocument>(collectionName);
+            IMongoCollection<T> collection = _database.GetCollection<T>(collectionName);
             return collection;
         }
     }
