@@ -130,9 +130,9 @@
     <Compile Include="Models\ProxyDataModel.cs" />
     <Compile Include="MongoConnector.cs" />
     <Compile Include="MongoModels\PortMongoModel.cs" />
-    <Compile Include="MongoModels\ProxyStoreMongoModel.cs" />
+    <Compile Include="MongoModels\MongoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyPortStore.cs" />
+    <Compile Include="PortStore.cs" />
     <Compile Include="ProxyStore.cs" />
   </ItemGroup>
   <ItemGroup>
