@@ -15,11 +15,10 @@ namespace TestLib
             ProxyDataModel proxyDataModel = new ProxyDataModel
             {
                 Ip = "IpTest",
-                Port = "PortTest",
                 Password = "PassTest",
                 User = "UserTest"
             };
-            string proxyName = "testProxy";
+            string proxyName = "testProxy1";
             await ProxyStore.AddProxyData(proxyName, proxyDataModel);
             Console.ReadLine();
         }
