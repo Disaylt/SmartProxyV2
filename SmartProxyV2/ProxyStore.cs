@@ -10,30 +10,34 @@ using SmartProxyV2.MongoModels;
 
 namespace SmartProxyV2
 {
-    public static class ProxyStore
+    internal class ProxyStore
     {
         private const string _collectionName = "ProxyStore";
-        private readonly static IMongoCollection<MongoModel> _collection;
+        protected readonly IMongoCollection<ProxyMongoModel> _collection;
 
-        static ProxyStore()
+        internal ProxyStore()
         {
-            _collection = MongoConnector.GetCollection<MongoModel>(_collectionName);
+            _collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
         }
 
-        public async static Task<ProxyDataModel> GetProxyData(string proxyName)
+        internal virtual async Task<ProxyDataModel> GetProxyData(string proxyName)
         {
-            var filter = Builders<MongoModel>.Filter.Eq("ProxyName", proxyName);
+            var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
             var ProxyDataModel = await _collection.Find(filter).FirstOrDefaultAsync();
             return ProxyDataModel;
         }
 
-        public async static Task AddProxyData(string proxyName, ProxyDataModel proxyData)
+        internal async Task AddProxyData(string proxyName, string proxyType, ProxyDataModel proxyData)
         {
-            var filter = Builders<MongoModel>.Filter.Eq("ProxyName", proxyName);
+            var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
             var proxyNameExist = _collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);
             if (!proxyNameExist)
             {
-                MongoModel proxyStoreMongoModel = new MongoModel(proxyData) { ProxyName = proxyName };
+                ProxyMongoModel proxyStoreMongoModel = new ProxyMongoModel(proxyData) 
+                {
+                    ProxyName = proxyName,
+                    Type = proxyType
+                };
                 await _collection.InsertOneAsync(proxyStoreMongoModel);
             }
         }

@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2.MongoModels
 {
-    internal class MongoModel : ProxyDataModel, IMongoCollectionData
+    internal class ProxyMongoModel : ProxyDataModel, IMongoCollectionData
     {
 
         public string ProxyName { get; set; }
+        public string Type { get; set; }
         public BsonObjectId _id { get; set; }
 
-        internal MongoModel() { }
-        internal MongoModel(ProxyDataModel proxyData) : base(proxyData)
+        internal ProxyMongoModel() { }
+        internal ProxyMongoModel(ProxyDataModel proxyData) : base(proxyData)
         {
 
         }

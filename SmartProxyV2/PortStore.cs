@@ -12,14 +12,14 @@ namespace SmartProxyV2
     internal class PortStore
     {
         private const string _collectionName = "ProxyPort";
-        private readonly static IMongoCollection<PortMongoModel> _collection;
+        private readonly IMongoCollection<PortMongoModel> _collection;
 
-        static PortStore()
+        internal PortStore()
         {
             _collection = MongoConnector.GetCollection<PortMongoModel>(_collectionName);
         }
 
-        static List<PortMongoModel> GetAvailablePorxyPorts(string type)
+        internal List<PortMongoModel> GetAvailablePorxyPorts(string type)
         {
             var filterBuilder = Builders<PortMongoModel>.Filter;
             var filter = filterBuilder.Eq("Type", type) & filterBuilder.Eq("IsUse", false);

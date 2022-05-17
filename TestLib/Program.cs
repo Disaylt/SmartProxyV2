@@ -12,14 +12,6 @@ namespace TestLib
     {
         static async Task Main(string[] args)
         {
-            ProxyDataModel proxyDataModel = new ProxyDataModel
-            {
-                Ip = "IpTest",
-                Password = "PassTest",
-                User = "UserTest"
-            };
-            string proxyName = "testProxy1";
-            await ProxyStore.AddProxyData(proxyName, proxyDataModel);
             Console.ReadLine();
         }
     }
