@@ -131,8 +131,9 @@
     <Compile Include="MongoConnector.cs" />
     <Compile Include="MongoModels\PortMongoModel.cs" />
     <Compile Include="MongoModels\ProxyMongoModel.cs" />
+    <Compile Include="ProxyPortStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PortStore.cs" />
+    <Compile Include="ProxyPortController.cs" />
     <Compile Include="ProxyStore.cs" />
     <Compile Include="SmartProxyHandler.cs" />
   </ItemGroup>
