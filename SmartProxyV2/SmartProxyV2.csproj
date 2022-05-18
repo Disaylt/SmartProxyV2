@@ -133,8 +133,8 @@
     <Compile Include="MongoModels\ProxyMongoModel.cs" />
     <Compile Include="ProxyPortStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyPortController.cs" />
-    <Compile Include="ProxyStore.cs" />
+    <Compile Include="ProxyPort.cs" />
+    <Compile Include="ProxyUrlStore.cs" />
     <Compile Include="SmartProxyHandler.cs" />
   </ItemGroup>
   <ItemGroup>
