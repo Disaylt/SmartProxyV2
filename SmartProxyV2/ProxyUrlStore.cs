@@ -10,12 +10,12 @@ using SmartProxyV2.MongoModels;
 
 namespace SmartProxyV2
 {
-    internal class ProxyStore
+    internal class ProxyUrlStore
     {
         private const string _collectionName = "ProxyStore";
         protected readonly IMongoCollection<ProxyMongoModel> _collection;
 
-        internal ProxyStore()
+        internal ProxyUrlStore()
         {
             _collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
         }
