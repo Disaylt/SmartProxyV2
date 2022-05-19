@@ -10,27 +10,27 @@ using SmartProxyV2.MongoModels;
 
 namespace SmartProxyV2
 {
-    internal class ProxyUrlStore
+    internal static class ProxyUrlStore
     {
         private const string _collectionName = "ProxyStore";
-        protected readonly IMongoCollection<ProxyMongoModel> _collection;
+        internal readonly static IMongoCollection<ProxyMongoModel> Collection;
 
-        internal ProxyUrlStore()
+        static ProxyUrlStore()
         {
-            _collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
+            Collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
         }
 
-        internal virtual async Task<ProxyDataModel> GetProxyData(string proxyName)
+        internal static async Task<ProxyModel> GetProxyData(string proxyName)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
-            var ProxyDataModel = await _collection.Find(filter).FirstOrDefaultAsync();
+            var ProxyDataModel = await Collection.Find(filter).FirstOrDefaultAsync();
             return ProxyDataModel;
         }
 
-        internal async Task AddProxyData(string proxyName, string proxyType, ProxyDataModel proxyData)
+        internal static async Task AddProxyData(string proxyName, string proxyType, ProxyModel proxyData)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
-            var proxyNameExist = _collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);
+            var proxyNameExist = Collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);
             if (!proxyNameExist)
             {
                 ProxyMongoModel proxyStoreMongoModel = new ProxyMongoModel(proxyData) 
@@ -38,7 +38,7 @@ namespace SmartProxyV2
                     ProxyName = proxyName,
                     Type = proxyType
                 };
-                await _collection.InsertOneAsync(proxyStoreMongoModel);
+                await Collection.InsertOneAsync(proxyStoreMongoModel);
             }
         }
     }

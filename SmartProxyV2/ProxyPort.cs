@@ -23,7 +23,7 @@ namespace SmartProxyV2
             _mainFilter = filterBuilder.Eq("Port", port) & filterBuilder.Eq("Type", type);
         }
 
-        internal bool ExistsDataPort()
+        internal bool PortExists()
         {
             var isExist = ProxyPortStore.Collection
                 .Find(_mainFilter)
@@ -32,23 +32,18 @@ namespace SmartProxyV2
             return isExist;
         }
 
-        internal List<PortMongoModel> GetAvailablePorxyPorts()
-        {
-            var filterBuilder = Builders<PortMongoModel>.Filter;
-            var filter = filterBuilder.Eq("Type", Type) & filterBuilder.Eq("IsUse", false);
-            var ProxyDataModel =  ProxyPortStore.Collection.Find(filter).ToList();
-            return ProxyDataModel;
-        }
-
         internal async Task UpdateUseStatusPort(bool useStatus)
         {
             BsonObjectId id = await GetFirstObjectId();
-            await ProxyPortStore.Collection.UpdateOneAsync(
-                new BsonDocument("_id", id),
-                new BsonDocument("IsUse", useStatus));
+            if(id != null)
+            {
+                await ProxyPortStore.Collection.UpdateOneAsync(
+                    new BsonDocument("_id", id),
+                    new BsonDocument("IsUse", useStatus));
+            }
         }
 
-        private async Task<BsonObjectId> GetFirstObjectId()
+        protected async Task<BsonObjectId> GetFirstObjectId()
         {
             var bsonDocument = await ProxyPortStore.Collection
                 .Find(_mainFilter)

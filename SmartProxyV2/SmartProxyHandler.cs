@@ -8,15 +8,12 @@ namespace SmartProxyV2
 {
     public static class SmartProxyHandler
     {
-        private readonly static ProxyPort _portStore;
-        private readonly static ProxyUrlStore _proxyStore;
-
-        static SmartProxyHandler()
+        public static async Task ClosePort(ProxyPort proxyPort)
         {
-            _proxyStore = new ProxyUrlStore();
+            await proxyPort.UpdateUseStatusPort(false);
         }
 
-        public static void ClosePort()
+        public static async Task<> GetCustomProxy(string proxyName)
         {
             
         }
