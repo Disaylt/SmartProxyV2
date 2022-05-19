@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace SmartProxyV2
 {
     internal interface IMongoCollectionData
     {
-        BsonObjectId _id { get; set; }
+        [BsonId]
+        BsonObjectId Id { get; set; }
     }
 }

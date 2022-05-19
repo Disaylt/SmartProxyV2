@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using SmartProxyV2.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace SmartProxyV2.MongoModels
 
         public string ProxyName { get; set; }
         public string Type { get; set; }
-        public BsonObjectId _id { get; set; }
+        [BsonId]
+        public BsonObjectId Id { get; set; }
 
         internal ProxyMongoModel() { }
         internal ProxyMongoModel(ProxyModel proxyData) : base(proxyData)

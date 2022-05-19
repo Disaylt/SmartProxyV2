@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMongoCollectionData.cs" />
-    <Compile Include="Models\ProxyDataModel.cs" />
+    <Compile Include="Models\ProxyModel.cs" />
     <Compile Include="MongoConnector.cs" />
     <Compile Include="MongoModels\PortMongoModel.cs" />
     <Compile Include="MongoModels\ProxyMongoModel.cs" />

@@ -11,7 +11,7 @@ namespace SmartProxyV2.Models
         public string User { get; set; }
         public string Password { get; set; }
         public string Ip { get; set; }
-        public string Port { get; set; }
+        public ProxyPort Port { get; set; }
 
         public ProxyModel() { }
         public ProxyModel(ProxyModel proxyData)
