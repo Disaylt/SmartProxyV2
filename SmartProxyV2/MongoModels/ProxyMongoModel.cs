@@ -16,7 +16,6 @@ namespace SmartProxyV2.MongoModels
         public string Type { get; set; }
         [BsonId]
         public BsonObjectId Id { get; set; }
-
         internal ProxyMongoModel() { }
         internal ProxyMongoModel(ProxyModel proxyData) : base(proxyData)
         {

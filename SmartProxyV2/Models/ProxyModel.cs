@@ -13,12 +13,15 @@ namespace SmartProxyV2.Models
         public string Ip { get; set; }
         public ProxyPort Port { get; set; }
 
-        public ProxyModel() { }
-        public ProxyModel(ProxyModel proxyData)
+        internal ProxyModel() { }
+        public ProxyModel(string user, string password, string ip)
         {
-            User = proxyData.User;
-            Password = proxyData.Password;
-            Ip = proxyData.Ip;
+            User = user;
+            Password = password;
+            Ip = ip;
+        }
+        internal ProxyModel(ProxyModel proxyData) : this(proxyData.User, proxyData.Password, proxyData.Ip)
+        {
             Port = proxyData.Port;
         }
     }

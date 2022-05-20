@@ -10,11 +10,11 @@ using SmartProxyV2.MongoModels;
 
 namespace SmartProxyV2
 {
-    internal static class ProxyUrlStore
+    public class ProxyUrlStore
     {
         private const string _collectionName = "ProxyStore";
         private static IMongoCollection<ProxyMongoModel> _collection;
-        public static IMongoCollection<ProxyMongoModel> Collection
+        internal static IMongoCollection<ProxyMongoModel> Collection
         {
             get
             {
@@ -26,14 +26,14 @@ namespace SmartProxyV2
             }
         }
 
-        internal static async Task<ProxyModel> GetProxyData(string proxyName)
+        internal static async Task<ProxyMongoModel> GetProxyData(string proxyName)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
             var ProxyDataModel = await Collection.Find(filter).FirstOrDefaultAsync();
             return ProxyDataModel;
         }
 
-        internal static async Task AddProxyData(string proxyName, string proxyType, ProxyModel proxyData)
+        public static async Task AddProxyData(string proxyName, string proxyType, ProxyModel proxyData)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
             var proxyNameExist = Collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);

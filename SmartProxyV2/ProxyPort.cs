@@ -14,7 +14,6 @@ namespace SmartProxyV2
         public string Type { get; }
         public int Port { get; }
         private readonly FilterDefinition<PortMongoModel> _mainFilter;
-        private readonly BsonObjectId _id;
 
         public ProxyPort(string type, int port)
         {
@@ -22,7 +21,6 @@ namespace SmartProxyV2
             Port = port;
             var filterBuilder = Builders<PortMongoModel>.Filter;
             _mainFilter = filterBuilder.Eq("Port", port) & filterBuilder.Eq("Type", type);
-            _id = GetFirstObjectId().GetAwaiter().GetResult();
         }
 
         internal bool PortExists()
@@ -36,21 +34,22 @@ namespace SmartProxyV2
 
         internal async Task UpdateUseStatusPort(bool useStatus)
         {
-            if(_id != null)
+            BsonObjectId id = await GetFirstObjectId();
+            if (id != null)
             {
                 var updater = Builders<PortMongoModel>.Update.Set("IsUse", useStatus).CurrentDate("LastUse");
                 await ProxyPortStore.Collection.UpdateOneAsync(
-                    new BsonDocument("_id", _id), updater);
+                    new BsonDocument("_id", id), updater);
             }
         }
 
         internal async Task UpdateUseDateTime()
         {
             BsonObjectId id = await GetFirstObjectId();
-            if (_id != null)
+            if (id != null)
             {
                 await ProxyPortStore.Collection.UpdateOneAsync(
-                    new BsonDocument("_id", _id),
+                    new BsonDocument("_id", id),
                     new BsonDocument("LastUse", DateTime.Now));
             }
         }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2
 {
-    internal class ProxyPortStore
+    public class ProxyPortStore
     {
         private const string _collectionName = "ProxyPort";
         private static IMongoCollection<PortMongoModel> _collection;
-        public static IMongoCollection<PortMongoModel> Collection
+        internal static IMongoCollection<PortMongoModel> Collection
         {
             get
             {
