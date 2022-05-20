@@ -13,11 +13,17 @@ namespace SmartProxyV2
     internal static class ProxyUrlStore
     {
         private const string _collectionName = "ProxyStore";
-        internal readonly static IMongoCollection<ProxyMongoModel> Collection;
-
-        static ProxyUrlStore()
+        private static IMongoCollection<ProxyMongoModel> _collection;
+        public static IMongoCollection<ProxyMongoModel> Collection
         {
-            Collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
+            get
+            {
+                if (_collection == null)
+                {
+                    _collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
+                }
+                return _collection;
+            }
         }
 
         internal static async Task<ProxyModel> GetProxyData(string proxyName)

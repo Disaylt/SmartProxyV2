@@ -8,14 +8,20 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2
 {
-    public static class ProxyPortStore
+    internal class ProxyPortStore
     {
         private const string _collectionName = "ProxyPort";
-        internal static IMongoCollection<PortMongoModel> Collection { get; }
-
-        static ProxyPortStore()
+        private static IMongoCollection<PortMongoModel> _collection;
+        public static IMongoCollection<PortMongoModel> Collection
         {
-            Collection = MongoConnector.GetCollection<PortMongoModel>(_collectionName);
+            get
+            {
+                if( _collection == null )
+                {
+                    _collection = MongoConnector.GetCollection<PortMongoModel>(_collectionName);
+                }
+                return _collection;
+            }
         }
 
         public static async Task InsertProxyPort(ProxyPort proxyPort)
