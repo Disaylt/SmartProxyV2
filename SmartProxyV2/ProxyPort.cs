@@ -23,7 +23,7 @@ namespace SmartProxyV2
             _mainFilter = filterBuilder.Eq("Port", port) & filterBuilder.Eq("Type", type);
         }
 
-        internal bool ExistsDataPort()
+        internal bool PortExists()
         {
             var isExist = ProxyPortStore.Collection
                 .Find(_mainFilter)
@@ -32,29 +32,41 @@ namespace SmartProxyV2
             return isExist;
         }
 
-        internal List<PortMongoModel> GetAvailablePorxyPorts()
-        {
-            var filterBuilder = Builders<PortMongoModel>.Filter;
-            var filter = filterBuilder.Eq("Type", Type) & filterBuilder.Eq("IsUse", false);
-            var ProxyDataModel =  ProxyPortStore.Collection.Find(filter).ToList();
-            return ProxyDataModel;
-        }
-
         internal async Task UpdateUseStatusPort(bool useStatus)
         {
             BsonObjectId id = await GetFirstObjectId();
-            await ProxyPortStore.Collection.UpdateOneAsync(
-                new BsonDocument("_id", id),
-                new BsonDocument("IsUse", useStatus));
+            if (id != null)
+            {
+                var updater = Builders<PortMongoModel>.Update.Set("IsUse", useStatus).CurrentDate("LastUse");
+                await ProxyPortStore.Collection.UpdateOneAsync(
+                    new BsonDocument("_id", id), updater);
+            }
         }
 
-        private async Task<BsonObjectId> GetFirstObjectId()
+        internal async Task UpdateUseDateTime()
+        {
+            BsonObjectId id = await GetFirstObjectId();
+            if (id != null)
+            {
+                await ProxyPortStore.Collection.UpdateOneAsync(
+                    new BsonDocument("_id", id),
+                    new BsonDocument("LastUse", DateTime.Now));
+            }
+        }
+
+        protected async Task<BsonObjectId> GetFirstObjectId()
         {
             var bsonDocument = await ProxyPortStore.Collection
                 .Find(_mainFilter)
                 .FirstOrDefaultAsync();
-            BsonObjectId bsonObjectId = bsonDocument._id;
+            BsonObjectId bsonObjectId = bsonDocument.Id;
             return bsonObjectId;
+        }
+
+        public static implicit operator ProxyPort(PortMongoModel portMongoModel)
+        {
+            ProxyPort proxyPort = new ProxyPort(portMongoModel.Type, portMongoModel.Port);
+            return proxyPort;
         }
     }
 }

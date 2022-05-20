@@ -10,27 +10,33 @@ using SmartProxyV2.MongoModels;
 
 namespace SmartProxyV2
 {
-    internal class ProxyUrlStore
+    public class ProxyUrlStore
     {
         private const string _collectionName = "ProxyStore";
-        protected readonly IMongoCollection<ProxyMongoModel> _collection;
-
-        internal ProxyUrlStore()
+        private static IMongoCollection<ProxyMongoModel> _collection;
+        internal static IMongoCollection<ProxyMongoModel> Collection
         {
-            _collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
+            get
+            {
+                if (_collection == null)
+                {
+                    _collection = MongoConnector.GetCollection<ProxyMongoModel>(_collectionName);
+                }
+                return _collection;
+            }
         }
 
-        internal virtual async Task<ProxyDataModel> GetProxyData(string proxyName)
+        internal static async Task<ProxyMongoModel> GetProxyData(string proxyName)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
-            var ProxyDataModel = await _collection.Find(filter).FirstOrDefaultAsync();
+            var ProxyDataModel = await Collection.Find(filter).FirstOrDefaultAsync();
             return ProxyDataModel;
         }
 
-        internal async Task AddProxyData(string proxyName, string proxyType, ProxyDataModel proxyData)
+        public static async Task AddProxyData(string proxyName, string proxyType, ProxyModel proxyData)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
-            var proxyNameExist = _collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);
+            var proxyNameExist = Collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);
             if (!proxyNameExist)
             {
                 ProxyMongoModel proxyStoreMongoModel = new ProxyMongoModel(proxyData) 
@@ -38,7 +44,7 @@ namespace SmartProxyV2
                     ProxyName = proxyName,
                     Type = proxyType
                 };
-                await _collection.InsertOneAsync(proxyStoreMongoModel);
+                await Collection.InsertOneAsync(proxyStoreMongoModel);
             }
         }
     }

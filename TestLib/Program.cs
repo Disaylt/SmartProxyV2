@@ -12,7 +12,9 @@ namespace TestLib
     {
         static async Task Main(string[] args)
         {
+            var asd = await SmartProxyHandler.GetCustomProxy("moscow");
             Console.ReadLine();
+            await SmartProxyHandler.OpenPort(asd.Port);
         }
     }
 }
