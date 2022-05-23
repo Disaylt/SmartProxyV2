@@ -142,6 +142,7 @@
     <Compile Include="ProxyPort.cs" />
     <Compile Include="ProxyUrlStore.cs" />
     <Compile Include="SmartProxyHandler.cs" />
+    <Compile Include="SmartProxySettingsStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
