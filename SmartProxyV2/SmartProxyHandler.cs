@@ -41,6 +41,18 @@ namespace SmartProxyV2
             }
         }
 
+        public static async Task<ProxyModel> GetRussianProxy()
+        {
+            var proxy = await GetCustomProxy("russian");
+            return proxy;
+        }
+
+        public static async Task<ProxyModel> GetMoscowProxy()
+        {
+            var proxy = await GetCustomProxy("moscow");
+            return proxy;
+        }
+
         private static ProxyPort GetDataPort(string type)
         {
             var ports = ProxyPortStore.GetAvailablePorxyPorts(type);
