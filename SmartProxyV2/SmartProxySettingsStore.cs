@@ -23,5 +23,13 @@ namespace SmartProxyV2
                 return _collection;
             }
         }
+
+        internal async static Task<int> GetLastPort(string portType)
+        {
+            var filter = Builders<SmartProxySettingsMongoModel>.Filter.Eq("PortType", portType);
+            var portSetting = await Collection.Find(filter).FirstOrDefaultAsync();
+            int lastPort = portSetting.LastUsePort;
+            return lastPort;
+        }
     }
 }
