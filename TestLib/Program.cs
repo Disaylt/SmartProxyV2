@@ -14,7 +14,7 @@ namespace TestLib
         {
             var asd = await SmartProxyHandler.GetCustomProxy("moscow");
             Console.ReadLine();
-            await SmartProxyHandler.OpenPort(asd.Port);
+            await SmartProxyHandler.OpenPort(asd.PortData);
         }
     }
 }

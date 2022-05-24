@@ -12,13 +12,13 @@ namespace SmartProxyV2
     public class ProxyPort
     {
         public string Type { get; }
-        public int Port { get; }
+        public int PortNum { get; }
         private readonly FilterDefinition<PortMongoModel> _mainFilter;
 
         public ProxyPort(string type, int port)
         {
             Type = type;
-            Port = port;
+            PortNum = port;
             var filterBuilder = Builders<PortMongoModel>.Filter;
             _mainFilter = filterBuilder.Eq("Port", port) & filterBuilder.Eq("Type", type);
         }

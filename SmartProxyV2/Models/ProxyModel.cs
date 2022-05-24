@@ -11,7 +11,7 @@ namespace SmartProxyV2.Models
         public string User { get; set; }
         public string Password { get; set; }
         public string Ip { get; set; }
-        public ProxyPort Port { get; set; }
+        public ProxyPort PortData { get; set; }
 
         internal ProxyModel() { }
         public ProxyModel(string user, string password, string ip)
@@ -22,7 +22,7 @@ namespace SmartProxyV2.Models
         }
         internal ProxyModel(ProxyModel proxyData) : this(proxyData.User, proxyData.Password, proxyData.Ip)
         {
-            Port = proxyData.Port;
+            PortData = proxyData.PortData;
         }
     }
 }

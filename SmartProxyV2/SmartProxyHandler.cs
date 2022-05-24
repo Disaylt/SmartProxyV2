@@ -29,10 +29,10 @@ namespace SmartProxyV2
         public static async Task<ProxyModel> GetCustomProxy(string proxyName)
         {
             var proxy = await ProxyUrlStore.GetProxyData(proxyName);
-            proxy.Port = GetDataPort(proxy.Type);
-            if(proxy.Port != null)
+            proxy.PortData = GetDataPort(proxy.Type);
+            if(proxy.PortData != null)
             {
-                await ClosePort(proxy.Port);
+                await ClosePort(proxy.PortData);
                 return proxy;
             }
             else
