@@ -21,12 +21,12 @@ namespace SmartProxyV2
         {
             var filter = Builders<ProxySettingsMongoModel>.Filter.Eq("PortType", PortType);
             var portSetting = await Collection.Find(filter).FirstOrDefaultAsync();
+            await IncrementLastPort(portSetting);
             return portSetting;
         }
 
-        internal async Task IncrementLastPort()
+        private async Task IncrementLastPort(ProxySettingsMongoModel settingsData)
         {
-            var settingsData = await GetSettingsPort();
             int newNumPort;
             if(settingsData.LastUsePort > settingsData.MaxPort)
             {
