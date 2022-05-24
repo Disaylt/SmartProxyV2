@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using SmartProxyV2.MongoModels;
 using System;
 using System.Collections.Generic;
@@ -23,12 +24,21 @@ namespace SmartProxyV2
             return portSetting;
         }
 
-
-
         internal async Task IncrementLastPort()
         {
-            int lastPort = await GetLastPort();
-            int newLastPort = lastPort += 1;
+            var settingsData = await GetSettingsPort();
+            int newNumPort;
+            if(settingsData.LastUsePort > settingsData.MaxPort)
+            {
+                newNumPort = settingsData.MinPort;
+            }
+            else
+            {
+                newNumPort = settingsData.LastUsePort += 1;
+            }
+            await ProxyPortStore.Collection.UpdateOneAsync(
+                   new BsonDocument("_id", settingsData.Id),
+                   new BsonDocument("LastUsePort", newNumPort));
         }
     }
 }
