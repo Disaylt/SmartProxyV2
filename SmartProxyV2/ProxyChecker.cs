@@ -20,7 +20,7 @@ namespace SmartProxyV2
             ProxyModel = proxy;
         }
 
-        public WebProxy ConvertToWebProxy()
+        public WebProxy GetWebProxy()
         {
             WebProxy webProxy = new WebProxy(ProxyModel.Ip, ProxyModel.PortData.PortNum);
             ICredentials credentials = new NetworkCredential(ProxyModel.User, ProxyModel.Password);
@@ -32,6 +32,7 @@ namespace SmartProxyV2
         {
             using (HttpClientHandler httpMessageHandler = new HttpClientHandler())
             {
+                httpMessageHandler.Proxy = GetWebProxy();
                 using (var httpClient = new HttpClient(httpMessageHandler))
                 {
                     using (var request = new HttpRequestMessage(new HttpMethod("GET"), "http://ip-api.com/json"))

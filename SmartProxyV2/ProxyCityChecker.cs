@@ -13,18 +13,24 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2
 {
-    internal class ProxyCityChecker
+    internal class ProxyCityChecker : ProxyChecker
     {
-        protected readonly ProxyModel ProxyModel;
-
-        internal ProxyCityChecker(ProxyModel proxy)
+        internal ProxyCityChecker(ProxyModel proxy) : base(proxy)
         {
-            ProxyModel = proxy;
+
         }
 
         internal async Task<bool> ProxyFromCity(string city)
         {
             ProxyJsonModel proxyInfo = await GetProxyInfo();
+            if (proxyInfo.City.ToLower() == city.ToLower())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
