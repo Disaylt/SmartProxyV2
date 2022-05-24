@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2.MongoModels
 {
-    internal class SmartProxySettingsMongoModel : IMongoCollectionData
+    public class SmartProxySettingsMongoModel : IMongoCollectionData
     {
         public BsonObjectId Id { get; set; }
         public string PortType { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2
 {
-    internal class SmartProxySettingsStore
+    public class SmartProxySettingsStore
     {
         private const string _collectionName = "Settings";
         private static IMongoCollection<SmartProxySettingsMongoModel> _collection;
@@ -23,5 +23,7 @@ namespace SmartProxyV2
                 return _collection;
             }
         }
+
+
     }
 }

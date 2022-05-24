@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 
 namespace SmartProxyV2
 {
-    internal class SmartProxyPortTypeSettingsStore : SmartProxySettingsStore
+    public class SmartProxyPortTypeSettingsStore : SmartProxySettingsStore
     {
         protected readonly string PortType;
         internal SmartProxyPortTypeSettingsStore(string portType)
         {
             PortType = portType;
+        }
+
+        public async Task AddNewSettings(SmartProxySettingsMongoModel settingsModel)
+        {
+            await Collection.InsertOneAsync(settingsModel);
         }
 
         internal async Task<SmartProxySettingsMongoModel> GetSettingsPort()
