@@ -12,5 +12,7 @@ namespace SmartProxyV2.MongoModels
         public BsonObjectId Id { get; set; }
         public string PortType { get; set; }
         public int LastUsePort { get; set; }
+        public int MaxPort { get; set; }
+        public int MinPort { get; set; }
     }
 }
