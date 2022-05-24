@@ -29,16 +29,28 @@ namespace SmartProxyV2
         public static async Task<ProxyModel> GetCustomProxy(string proxyName)
         {
             var proxy = await ProxyUrlStore.GetProxyData(proxyName);
-            proxy.Port = GetDataPort(proxy.Type);
-            if(proxy.Port != null)
+            proxy.PortData = GetDataPort(proxy.Type);
+            if(proxy.PortData != null)
             {
-                await ClosePort(proxy.Port);
+                await ClosePort(proxy.PortData);
                 return proxy;
             }
             else
             {
                 return null;
             }
+        }
+
+        public static async Task<ProxyModel> GetRussianProxy()
+        {
+            var proxy = await GetCustomProxy("russian");
+            return proxy;
+        }
+
+        public static async Task<ProxyModel> GetMoscowProxy()
+        {
+            var proxy = await GetCustomProxy("moscow");
+            return proxy;
         }
 
         private static ProxyPort GetDataPort(string type)

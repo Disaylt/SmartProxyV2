@@ -31,7 +31,7 @@ namespace SmartProxyV2
                 PortMongoModel portMongoModel = new PortMongoModel()
                 {
                     IsUse = false,
-                    Port = proxyPort.Port,
+                    Port = proxyPort.PortNum,
                     Type = proxyPort.Type,
                     LastUse = DateTime.Now
                 };
