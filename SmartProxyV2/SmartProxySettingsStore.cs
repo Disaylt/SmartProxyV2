@@ -11,19 +11,22 @@ namespace SmartProxyV2
     public class SmartProxySettingsStore
     {
         private const string _collectionName = "Settings";
-        private static IMongoCollection<SmartProxySettingsMongoModel> _collection;
-        internal static IMongoCollection<SmartProxySettingsMongoModel> Collection
+        private static IMongoCollection<ProxySettingsMongoModel> _collection;
+        internal static IMongoCollection<ProxySettingsMongoModel> Collection
         {
             get
             {
                 if (_collection == null)
                 {
-                    _collection = MongoConnector.GetCollection<SmartProxySettingsMongoModel>(_collectionName);
+                    _collection = MongoConnector.GetCollection<ProxySettingsMongoModel>(_collectionName);
                 }
                 return _collection;
             }
         }
-
+        public static async Task AddNewSettings(ProxySettingsMongoModel settingsModel)
+        {
+            await Collection.InsertOneAsync(settingsModel);
+        }
 
     }
 }

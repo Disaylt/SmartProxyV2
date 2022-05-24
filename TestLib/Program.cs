@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SmartProxyV2.Models;
 using SmartProxyV2;
+using SmartProxyV2.MongoModels;
 
 namespace TestLib
 {
@@ -12,9 +13,14 @@ namespace TestLib
     {
         static async Task Main(string[] args)
         {
-            var asd = await SmartProxyHandler.GetCustomProxy("moscow");
-            Console.ReadLine();
-            await SmartProxyHandler.OpenPort(asd.PortData);
+            ProxySettingsMongoModel proxyMongo = new ProxySettingsMongoModel()
+            {
+                PortType = "russian",
+                MaxPort = 49999,
+                MinPort = 40001,
+                LastUsePort = 40001
+            };
+            await SmartProxySettingsStore.AddNewSettings(proxyMongo);
         }
     }
 }

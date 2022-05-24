@@ -135,7 +135,7 @@
     <Compile Include="MongoConnector.cs" />
     <Compile Include="MongoModels\PortMongoModel.cs" />
     <Compile Include="MongoModels\ProxyMongoModel.cs" />
-    <Compile Include="MongoModels\SmartProxySettingsMongoModel.cs" />
+    <Compile Include="MongoModels\ProxySettingsMongoModel.cs" />
     <Compile Include="ProxyChecker.cs" />
     <Compile Include="ProxyCityChecker.cs" />
     <Compile Include="ProxyPortStore.cs" />

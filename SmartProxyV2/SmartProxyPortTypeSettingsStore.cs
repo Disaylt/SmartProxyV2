@@ -12,19 +12,14 @@ namespace SmartProxyV2
     public class SmartProxyPortTypeSettingsStore : SmartProxySettingsStore
     {
         protected readonly string PortType;
-        internal SmartProxyPortTypeSettingsStore(string portType)
+        public SmartProxyPortTypeSettingsStore(string portType)
         {
             PortType = portType;
         }
 
-        public async Task AddNewSettings(SmartProxySettingsMongoModel settingsModel)
+        internal async Task<ProxySettingsMongoModel> GetSettingsPort()
         {
-            await Collection.InsertOneAsync(settingsModel);
-        }
-
-        internal async Task<SmartProxySettingsMongoModel> GetSettingsPort()
-        {
-            var filter = Builders<SmartProxySettingsMongoModel>.Filter.Eq("PortType", PortType);
+            var filter = Builders<ProxySettingsMongoModel>.Filter.Eq("PortType", PortType);
             var portSetting = await Collection.Find(filter).FirstOrDefaultAsync();
             return portSetting;
         }
