@@ -57,17 +57,17 @@ namespace SmartProxyV2
         {
             SmartProxyPortTypeSettingsStore smartProxyPortTypeSettingsStore = new SmartProxyPortTypeSettingsStore("russian");
             ProxyModel proxy = await ProxyUrlStore.GetProxyData("russian");
-            for(int attempt = 0; attempt < 100; attempt++)
+            for (int attempt = 0; attempt < 100; attempt++)
             {
                 var settingPort = await smartProxyPortTypeSettingsStore.GetSettingsPort();
-                ProxyPort proxyPort = new ProxyPort(settingPort.PortType, settingPort.LastUsePort);
-                proxy.PortData = proxyPort;
-                ProxyCityChecker proxyCityChecker = new ProxyCityChecker(proxy);
-                if (await proxyCityChecker.ProxyFromCity("moscow"))
-                {
-                    await ClosePort(proxy.PortData);
-                    return proxy;
-                }
+                //ProxyPort proxyPort = new ProxyPort(settingPort.PortType, settingPort.LastUsePort);
+                //proxy.PortData = proxyPort;
+                //ProxyCityChecker proxyCityChecker = new ProxyCityChecker(proxy);
+                //if (await proxyCityChecker.ProxyFromCity("moscow"))
+                //{
+                //    await ClosePort(proxy.PortData);
+                //    return proxy;
+                //}
             };
             return null;
 
