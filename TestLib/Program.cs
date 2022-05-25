@@ -13,8 +13,7 @@ namespace TestLib
     {
         static async Task Main(string[] args)
         {
-            var proxy = await SmartProxyHandler.GetMoscowProxyWithRussianPort();
-            Console.ReadLine();
+
         }
     }
 }
