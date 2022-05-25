@@ -37,9 +37,10 @@ namespace SmartProxyV2
             BsonObjectId id = await GetFirstObjectId();
             if (id != null)
             {
-                var updater = Builders<PortMongoModel>.Update.Set("IsUse", useStatus).CurrentDate("LastUse");
+                var updater = Builders<PortMongoModel>.Update.Set("IsUse", useStatus);
                 await ProxyPortStore.Collection.UpdateOneAsync(
                     new BsonDocument("_id", id), updater);
+                await UpdateUseDateTime();
             }
         }
 
@@ -48,9 +49,9 @@ namespace SmartProxyV2
             BsonObjectId id = await GetFirstObjectId();
             if (id != null)
             {
+                var updater = Builders<PortMongoModel>.Update.Set("LastUse", DateTime.Now);
                 await ProxyPortStore.Collection.UpdateOneAsync(
-                    new BsonDocument("_id", id),
-                    new BsonDocument("LastUse", DateTime.Now));
+                    new BsonDocument("_id", id), updater);
             }
         }
 

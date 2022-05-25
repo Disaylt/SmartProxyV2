@@ -13,14 +13,7 @@ namespace TestLib
     {
         static async Task Main(string[] args)
         {
-            ProxySettingsMongoModel proxyMongo = new ProxySettingsMongoModel()
-            {
-                PortType = "russian",
-                MaxPort = 49999,
-                MinPort = 40001,
-                LastUsePort = 40001
-            };
-            await SmartProxySettingsStore.AddNewSettings(proxyMongo);
+
         }
     }
 }

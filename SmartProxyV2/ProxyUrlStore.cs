@@ -33,7 +33,7 @@ namespace SmartProxyV2
             return ProxyDataModel;
         }
 
-        public static async Task AddProxyData(string proxyName, string proxyType, ProxyModel proxyData)
+        public static async Task InsertProxyData(string proxyName, string proxyType, ProxyModel proxyData)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
             var proxyNameExist = Collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);

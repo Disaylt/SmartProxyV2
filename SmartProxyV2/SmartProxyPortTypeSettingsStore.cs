@@ -36,9 +36,9 @@ namespace SmartProxyV2
             {
                 newNumPort = settingsData.LastUsePort += 1;
             }
-            await ProxyPortStore.Collection.UpdateOneAsync(
-                   new BsonDocument("_id", settingsData.Id),
-                   new BsonDocument("LastUsePort", newNumPort));
+            var update = Builders<ProxySettingsMongoModel>.Update.Set("LastUsePort", newNumPort);
+            await Collection.UpdateOneAsync(
+                   new BsonDocument("_id", settingsData.Id), update);
         }
     }
 }
