@@ -28,14 +28,21 @@ namespace SmartProxyV2
 
         public static async Task<ProxyModel> GetCustomProxy(string proxyName)
         {
-            var proxy = await ProxyUrlStore.GetProxyData(proxyName);
-            proxy.PortData = GetDataPort(proxy.Type);
-            if(proxy.PortData != null)
+            try
             {
-                await ClosePort(proxy.PortData);
-                return proxy;
+                var proxy = await ProxyUrlStore.GetProxyData(proxyName);
+                proxy.PortData = GetDataPort(proxy.Type);
+                if (proxy.PortData != null)
+                {
+                    await ClosePort(proxy.PortData);
+                    return proxy;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch
             {
                 return null;
             }
@@ -75,13 +82,20 @@ namespace SmartProxyV2
 
         private static ProxyPort GetDataPort(string type)
         {
-            var ports = ProxyPortStore.GetAvailablePorxyPorts(type);
-            if(ports.Count > 0)
+            try
             {
-                int indexSelect = _random.Next(0, ports.Count);
-                return ports[indexSelect];
+                var ports = ProxyPortStore.GetAvailablePorxyPorts(type);
+                if (ports.Count > 0)
+                {
+                    int indexSelect = _random.Next(0, ports.Count);
+                    return ports[indexSelect];
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch
             {
                 return null;
             }
