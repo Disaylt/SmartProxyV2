@@ -28,9 +28,16 @@ namespace SmartProxyV2
 
         internal static async Task<ProxyMongoModel> GetProxyData(string proxyName)
         {
-            var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
-            var ProxyDataModel = await Collection.Find(filter).FirstOrDefaultAsync();
-            return ProxyDataModel;
+            try
+            {
+                var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
+                var ProxyDataModel = await Collection.Find(filter).FirstOrDefaultAsync();
+                return ProxyDataModel;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static async Task InsertProxyData(string proxyName, string proxyType, ProxyModel proxyData)
