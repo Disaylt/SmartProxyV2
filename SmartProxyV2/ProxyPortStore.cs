@@ -24,7 +24,7 @@ namespace SmartProxyV2
             }
         }
 
-        public static async Task InsertProxyPort(ProxyPort proxyPort)
+        public static async Task InsertProxyPortAsync(ProxyPort proxyPort)
         {
             if (!proxyPort.PortExists())
             {

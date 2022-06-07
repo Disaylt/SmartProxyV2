@@ -26,7 +26,7 @@ namespace SmartProxyV2
             }
         }
 
-        internal static async Task<ProxyMongoModel> GetProxyData(string proxyName)
+        internal static async Task<ProxyMongoModel> GetProxyDataAsync(string proxyName)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace SmartProxyV2
             }
         }
 
-        public static async Task InsertProxyData(string proxyName, string proxyType, ProxyModel proxyData)
+        public static async Task InsertProxyDataAsync(string proxyName, string proxyType, ProxyModel proxyData)
         {
             var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
             var proxyNameExist = Collection.Find(filter).ToList().Any(x => x.ProxyName == proxyName);

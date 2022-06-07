@@ -16,25 +16,25 @@ namespace SmartProxyV2
             _random = new Random();
         }
 
-        public static async Task OpenPort(ProxyPort proxyPort)
+        public static async Task OpenPortAsync(ProxyPort proxyPort)
         {
-            await proxyPort.UpdateUseStatusPort(false);
+            await proxyPort.UpdateUseStatusPortAsync(false);
         }
 
-        public static async Task ClosePort(ProxyPort proxyPort)
+        public static async Task ClosePortAsync(ProxyPort proxyPort)
         {
-            await proxyPort.UpdateUseStatusPort(true);
+            await proxyPort.UpdateUseStatusPortAsync(true);
         }
 
-        public static async Task<ProxyModel> GetCustomProxy(string proxyName)
+        public static async Task<ProxyModel> GetCustomProxyAsync(string proxyName)
         {
             try
             {
-                var proxy = await ProxyUrlStore.GetProxyData(proxyName);
+                var proxy = await ProxyUrlStore.GetProxyDataAsync(proxyName);
                 proxy.PortData = GetDataPort(proxy.Type);
                 if (proxy.PortData != null)
                 {
-                    await ClosePort(proxy.PortData);
+                    await ClosePortAsync(proxy.PortData);
                     return proxy;
                 }
                 else
@@ -48,31 +48,31 @@ namespace SmartProxyV2
             }
         }
 
-        public static async Task<ProxyModel> GetRussianProxy()
+        public static async Task<ProxyModel> GetRussianProxyAsync()
         {
-            var proxy = await GetCustomProxy("russian");
+            var proxy = await GetCustomProxyAsync("russian");
             return proxy;
         }
 
-        public static async Task<ProxyModel> GetMoscowProxy()
+        public static async Task<ProxyModel> GetMoscowProxyAsync()
         {
-            var proxy = await GetCustomProxy("moscow");
+            var proxy = await GetCustomProxyAsync("moscow");
             return proxy;
         }
 
-        public static async Task<ProxyModel> GetMoscowProxyWithRussianPort()
+        public static async Task<ProxyModel> GetMoscowProxyWithRussianPortAsync()
         {
             SmartProxyPortTypeSettingsStore smartProxyPortTypeSettingsStore = new SmartProxyPortTypeSettingsStore("russian");
-            ProxyModel proxy = await ProxyUrlStore.GetProxyData("russian");
+            ProxyModel proxy = await ProxyUrlStore.GetProxyDataAsync("russian");
             for (int attempt = 0; attempt < 100; attempt++)
             {
-                var settingPort = await smartProxyPortTypeSettingsStore.GetSettingsPort();
+                var settingPort = await smartProxyPortTypeSettingsStore.GetSettingsPortAsync();
                 ProxyPort proxyPort = new ProxyPort(settingPort.PortType, settingPort.LastUsePort);
                 proxy.PortData = proxyPort;
                 ProxyCityChecker proxyCityChecker = new ProxyCityChecker(proxy);
-                if (await proxyCityChecker.ProxyFromCity("moscow"))
+                if (await proxyCityChecker.ProxyFromCityAsync("moscow"))
                 {
-                    await ClosePort(proxy.PortData);
+                    await ClosePortAsync(proxy.PortData);
                     return proxy;
                 }
             };

@@ -23,7 +23,7 @@ namespace SmartProxyV2
                 return _collection;
             }
         }
-        public static async Task AddNewSettings(ProxySettingsMongoModel settingsModel)
+        public static async Task AddNewSettingsAsync(ProxySettingsMongoModel settingsModel)
         {
             await Collection.InsertOneAsync(settingsModel);
         }
