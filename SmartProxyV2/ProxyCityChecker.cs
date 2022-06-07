@@ -20,9 +20,9 @@ namespace SmartProxyV2
 
         }
 
-        internal async Task<bool> ProxyFromCity(string city)
+        internal async Task<bool> ProxyFromCityAsync(string city)
         {
-            ProxyJsonModel proxyInfo = await GetProxyInfo();
+            ProxyJsonModel proxyInfo = await GetProxyInfoAsync();
             if (proxyInfo.City.ToLower() == city.ToLower())
             {
                 return true;

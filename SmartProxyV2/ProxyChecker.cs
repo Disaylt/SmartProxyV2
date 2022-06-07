@@ -28,7 +28,7 @@ namespace SmartProxyV2
             return webProxy;
         }
 
-        public async Task<ProxyJsonModel> GetProxyInfo()
+        public async Task<ProxyJsonModel> GetProxyInfoAsync()
         {
             using (HttpClientHandler httpMessageHandler = new HttpClientHandler())
             {

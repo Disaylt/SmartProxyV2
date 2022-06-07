@@ -17,15 +17,15 @@ namespace SmartProxyV2
             PortType = portType;
         }
 
-        internal async Task<ProxySettingsMongoModel> GetSettingsPort()
+        internal async Task<ProxySettingsMongoModel> GetSettingsPortAsync()
         {
             var filter = Builders<ProxySettingsMongoModel>.Filter.Eq("PortType", PortType);
             var portSetting = await Collection.Find(filter).FirstOrDefaultAsync();
-            await IncrementLastPort(portSetting);
+            await IncrementLastPortAsync(portSetting);
             return portSetting;
         }
 
-        private async Task IncrementLastPort(ProxySettingsMongoModel settingsData)
+        private async Task IncrementLastPortAsync(ProxySettingsMongoModel settingsData)
         {
             int newNumPort;
             if(settingsData.LastUsePort > settingsData.MaxPort)
