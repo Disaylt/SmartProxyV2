@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartProxyV2", "SmartProxyV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLib", "TestLib\TestLib.csproj", "{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartProxyV2_4.6.2", "SmartProxyV2_4.6.2\SmartProxyV2_4.6.2.csproj", "{B5A71AC9-780C-42CB-BE06-C8CA0515C919}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F3F11D9-584A-478E-A8F3-DF8AD7F012E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A71AC9-780C-42CB-BE06-C8CA0515C919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A71AC9-780C-42CB-BE06-C8CA0515C919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A71AC9-780C-42CB-BE06-C8CA0515C919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A71AC9-780C-42CB-BE06-C8CA0515C919}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
