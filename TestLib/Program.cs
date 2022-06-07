@@ -13,7 +13,7 @@ namespace TestLib
     {
         static void Main(string[] args)
         {
-
+            //тест функций библиотеки
         }
     }
 }
