@@ -20,6 +20,19 @@ namespace SmartProxyV2_ZennoLabVersion
 
         }
 
+        internal bool ProxyFromCity(string city)
+        {
+            ProxyJsonModel proxyInfo = GetProxyInfoAsync().Result;
+            if (proxyInfo.City.ToLower() == city.ToLower())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         internal async Task<bool> ProxyFromCityAsync(string city)
         {
             ProxyJsonModel proxyInfo = await GetProxyInfoAsync();

@@ -17,12 +17,36 @@ namespace SmartProxyV2_ZennoLabVersion
             PortType = portType;
         }
 
+        internal ProxySettingsMongoModel GetSettingsPort()
+        {
+            var filter = Builders<ProxySettingsMongoModel>.Filter.Eq("PortType", PortType);
+            var portSetting = Collection.Find(filter).FirstOrDefault();
+            IncrementLastPort(portSetting);
+            return portSetting;
+        }
+
         internal async Task<ProxySettingsMongoModel> GetSettingsPortAsync()
         {
             var filter = Builders<ProxySettingsMongoModel>.Filter.Eq("PortType", PortType);
             var portSetting = await Collection.Find(filter).FirstOrDefaultAsync();
             await IncrementLastPortAsync(portSetting);
             return portSetting;
+        }
+
+        private void IncrementLastPort(ProxySettingsMongoModel settingsData)
+        {
+            int newNumPort;
+            if (settingsData.LastUsePort > settingsData.MaxPort)
+            {
+                newNumPort = settingsData.MinPort;
+            }
+            else
+            {
+                newNumPort = settingsData.LastUsePort += 1;
+            }
+            var update = Builders<ProxySettingsMongoModel>.Update.Set("LastUsePort", newNumPort);
+            Collection.UpdateOne(
+                   new BsonDocument("_id", settingsData.Id), update);
         }
 
         private async Task IncrementLastPortAsync(ProxySettingsMongoModel settingsData)
