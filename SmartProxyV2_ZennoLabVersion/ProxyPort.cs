@@ -32,6 +32,18 @@ namespace SmartProxyV2_ZennoLabVersion
             return isExist;
         }
 
+        internal void UpdateUseStatusPort(bool useStatus)
+        {
+            BsonObjectId id = GetFirstObjectId();
+            if (id != null)
+            {
+                var updater = Builders<PortMongoModel>.Update.Set("IsUse", useStatus);
+                ProxyPortStore.Collection.UpdateOne(
+                    new BsonDocument("_id", id), updater);
+                UpdateUseDateTime();
+            }
+        }
+
         internal async Task UpdateUseStatusPortAsync(bool useStatus)
         {
             BsonObjectId id = await GetFirstObjectIdAsync();
@@ -44,6 +56,17 @@ namespace SmartProxyV2_ZennoLabVersion
             }
         }
 
+        internal void UpdateUseDateTime()
+        {
+            BsonObjectId id = GetFirstObjectId();
+            if (id != null)
+            {
+                var updater = Builders<PortMongoModel>.Update.Set("LastUse", DateTime.Now);
+                ProxyPortStore.Collection.UpdateOne(
+                    new BsonDocument("_id", id), updater);
+            }
+        }
+
         internal async Task UpdateUseDateTimeAsync()
         {
             BsonObjectId id = await GetFirstObjectIdAsync();
@@ -53,6 +76,15 @@ namespace SmartProxyV2_ZennoLabVersion
                 await ProxyPortStore.Collection.UpdateOneAsync(
                     new BsonDocument("_id", id), updater);
             }
+        }
+
+        protected BsonObjectId GetFirstObjectId()
+        {
+            var bsonDocument = ProxyPortStore.Collection
+                .Find(_mainFilter)
+                .FirstOrDefault();
+            BsonObjectId bsonObjectId = bsonDocument.Id;
+            return bsonObjectId;
         }
 
         protected async Task<BsonObjectId> GetFirstObjectIdAsync()

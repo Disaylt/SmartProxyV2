@@ -16,14 +16,46 @@ namespace SmartProxyV2_ZennoLabVersion
             _random = new Random();
         }
 
+        public static void OpenPort(ProxyPort proxyPort)
+        {
+            proxyPort.UpdateUseStatusPort(false);
+        }
+
         public static async Task OpenPortAsync(ProxyPort proxyPort)
         {
             await proxyPort.UpdateUseStatusPortAsync(false);
         }
 
+        public static void ClosePort(ProxyPort proxyPort)
+        {
+            proxyPort.UpdateUseStatusPort(true);
+        }
+
         public static async Task ClosePortAsync(ProxyPort proxyPort)
         {
             await proxyPort.UpdateUseStatusPortAsync(true);
+        }
+
+        public static ProxyModel GetCustomProxy(string proxyName)
+        {
+            try
+            {
+                var proxy = ProxyUrlStore.GetProxyData(proxyName);
+                proxy.PortData = GetDataPort(proxy.Type);
+                if (proxy.PortData != null)
+                {
+                    ClosePort(proxy.PortData);
+                    return proxy;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static async Task<ProxyModel> GetCustomProxyAsync(string proxyName)
@@ -48,9 +80,21 @@ namespace SmartProxyV2_ZennoLabVersion
             }
         }
 
+        public static ProxyModel GetRussianProxy()
+        {
+            var proxy = GetCustomProxy("russian");
+            return proxy;
+        }
+
         public static async Task<ProxyModel> GetRussianProxyAsync()
         {
             var proxy = await GetCustomProxyAsync("russian");
+            return proxy;
+        }
+
+        public static ProxyModel GetMoscowProxy()
+        {
+            var proxy = GetCustomProxy("moscow");
             return proxy;
         }
 
@@ -58,6 +102,25 @@ namespace SmartProxyV2_ZennoLabVersion
         {
             var proxy = await GetCustomProxyAsync("moscow");
             return proxy;
+        }
+
+        public static ProxyModel GetMoscowProxyWithRussianPort()
+        {
+            SmartProxyPortTypeSettingsStore smartProxyPortTypeSettingsStore = new SmartProxyPortTypeSettingsStore("russian");
+            ProxyModel proxy = ProxyUrlStore.GetProxyData("russian");
+            for (int attempt = 0; attempt < 100; attempt++)
+            {
+                var settingPort = smartProxyPortTypeSettingsStore.GetSettingsPort();
+                ProxyPort proxyPort = new ProxyPort(settingPort.PortType, settingPort.LastUsePort);
+                proxy.PortData = proxyPort;
+                ProxyCityChecker proxyCityChecker = new ProxyCityChecker(proxy);
+                if (proxyCityChecker.ProxyFromCity("moscow"))
+                {
+                    ClosePort(proxy.PortData);
+                    return proxy;
+                }
+            };
+            return null;
         }
 
         public static async Task<ProxyModel> GetMoscowProxyWithRussianPortAsync()

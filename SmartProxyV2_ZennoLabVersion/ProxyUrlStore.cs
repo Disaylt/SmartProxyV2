@@ -26,6 +26,20 @@ namespace SmartProxyV2_ZennoLabVersion
             }
         }
 
+        internal static ProxyMongoModel GetProxyData(string proxyName)
+        {
+            try
+            {
+                var filter = Builders<ProxyMongoModel>.Filter.Eq("ProxyName", proxyName);
+                var ProxyDataModel = Collection.Find(filter).FirstOrDefault();
+                return ProxyDataModel;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         internal static async Task<ProxyMongoModel> GetProxyDataAsync(string proxyName)
         {
             try
